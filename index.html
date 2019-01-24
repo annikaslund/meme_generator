@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+
+    .header {
+      text-align: center;
+      background: #eeeeee;
+      padding: 30px;
+    }
+
+    div {
+      text-align: left;
+    }
+
+    .input {
+      background: #D3D3D3;
+      text-align: center;
+    }
+
+    label {
+      padding: 20px;
+    }
+
+    label.imgInput {
+      padding: 20px 55px 20px 20px;
+    }
+
+    label.topInput {
+      padding: 20px 54px 20px 17px;
+    }
+
+    label.botInput {
+      padding: 20px 20px 20px 20px;
+    }
+
+    #container {
+      position: relative;
+      width: 80%;
+      margin: 10% 10% 10% 10%;
+    }
+
+    #container img{
+      width: 100%;
+    }
+
+    #textContainer{
+      width: 100%;
+      text-align: relative;
+      margin-top: -30%
+    }
+
+    #topTextCont h1{
+      text-align: center;
+      font-size: 9vw;
+      font-family: 'impact';
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      margin-top: -65%;
+    }
+    
+    #botTextCont h1{
+      text-align: center;
+      font-size: 9vw;
+      font-family: 'impact';
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      margin-top: 35%;
+    }
+    
+    #imgURL, #topText, #botText {
+      width: 600px;
+      height: 10px;
+      padding: 10px 150px 10px 30px;
+    }
+
+    button {
+      padding: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>I CAN HAZ MEMEZ?</h1>
+    Fill out the form to start creating memes!
+  </div>
+
+  <div class="input">
+    <form>
+      <label class="imgInput" for="imgURL">Image URL:</label>
+      <input type="text" id="imgURL" name="imgURL">
+      <br>
+      <label class="topInput" for="topText">Text On Top:</label>
+      <input type="text" id="topText" name="topText">
+      <br>
+      <label class="botInput" for="botText">Text On Bottom:</label>
+      <input type="text" id="botText" name="botText">
+    </form>
+    <button onclick="generateMeme(); clearForm()">Add Meme</button>
+    <button onclick="removeMeme()">Remove First Meme</button>
+  </div>
+
+  <script>
+    function generateMeme(){
+      var container = addContainer(); 
+      var img = addPic(); 
+      var topText = addTopText(); 
+      var botText = addBotText();
+      container.appendChild(img);
+      container.appendChild(topText); 
+      container.appendChild(botText);
+      document.body.appendChild(container);
+    }
+
+    function addContainer(){
+      var container = document.createElement("DIV");
+      container.id="container";
+      return container;
+    }
+    
+    function addPic(){
+      var img = document.createElement("IMG");
+      var URL = document.getElementById("imgURL").value;
+      img.src=URL;
+      return img;
+    }
+
+    function addTopText(){
+      var topText = document.createElement("DIV");
+      topText.id="topTextCont";
+
+      var text = document.getElementById("topText").value;
+      var textNode = document.createTextNode(text);
+      var heading = document.createElement("H1");
+      heading.appendChild(textNode);
+      topText.appendChild(heading);
+      return topText;
+    }
+
+    function addBotText(){
+      var botText = document.createElement("DIV");
+      botText.id="botTextCont";
+
+      var text = document.getElementById("botText").value;
+      var textNode = document.createTextNode(text);
+      var heading = document.createElement("H1");
+      heading.appendChild(textNode);
+      botText.appendChild(heading);
+      return botText;
+    }
+
+    function clearForm(){
+      document.getElementById("imgURL").value="";
+      document.getElementById("topText").value="";
+      document.getElementById("botText").value="";
+    }
+
+    function removeMeme(){
+      var images = document.getElementById("container");
+      if (images.hasChildNodes()) {
+        images.remove(images.childNodes[-1]);
+      }
+    }
+  </script>
+</body>
+</html>
